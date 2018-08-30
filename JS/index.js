@@ -1,3 +1,8 @@
 angular.module('myApp', []).controller('myCtrl', function() {
-alert("Hello World!");
+var oUIElements={
+    "0":
+    {
+        "UIName":""
+    }
+}
 });
