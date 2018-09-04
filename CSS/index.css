@@ -42,3 +42,27 @@
     padding-top:  5px;
     cursor:  pointer;
 }
+
+.output-table{
+    background-color: lightgrey;
+    margin-left: 16px;
+    margin-top: 32px;
+    border-radius: 20px;
+    margin-right: 85px;
+    max-height: 800px;
+    min-height: 800px;
+    padding-top: 25px;
+}
+
+.table-body{
+    margin-left: 40px;
+    color: green;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border:0px solid white;
+    POSITION:  STICKY;
+}
+
+.table-cell{
+    max-width: 150px;
+    min-width: 150px;
+}
