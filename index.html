@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="JS/jquery-3.3.1.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
 <!-- stylesheets -->
 <link rel="stylesheet" type="text/css" media="screen" href="CSS/index.css" />
@@ -29,13 +30,30 @@
         </div>
     </div>
     <div class="file-container">
+        <div class="text-area-heading">
+            Copy the result and Paste it here!
+        </div>
     <div class="file-upload-container">
-        <input type="file" id="file">
-        <!-- <div class="upload-button">Upload file</div> -->
+        <textarea id="file" class ="result-area" rows="30" cols="150"></textarea>
     </div>
+    <div class="upload-button">Upload Result</div>
     </div>
-    <div class="output-table">
-        <div id="output-container"></div>
+    <div id="output-table-container" class="output-table no-display">
+            <div class="text-area-heading">
+                    Here is the uploaded result
+                </div>
+        <div id="output-container">
+        </div>
+    </div>
+    <div id="calculation-container" class="manipulation-container no-display">
+           <div class="text-area-heading">
+               Top 5 Students of the Class 
+           </div>
+           <div id="output-container-top-students">
+            </div>
+            <div class="chart-container">
+                    <div id="chartContainer" style="height: 300px; width: 80%;"></div>
+            </div>
     </div>
     </div>
 </body>

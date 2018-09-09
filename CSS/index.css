@@ -19,27 +19,28 @@
     margin-top: 32px;
     border-radius: 20px;
     margin-right: 85px;
-    max-height: 80px;
-    min-height: 80px;
+    max-height: 800px;
+    min-height: 800px;
     padding-top: 25px;
 }
 
 .file-upload-container{
-    padding-left: 50px;
+    padding-left: 28px;
+    padding-top: 50px;
 }
 
 .upload-button{
-    margin-left: 200px;
-    margin-top: -28px;
+    margin-left: 30px;
+    margin-top: 48px;
     color: white;
     background: green;
     border-radius: 20px;
-    max-width: 85px;
-    min-width: 85px;
+    max-width: 104px;
+    min-width: 104px;
     max-height: 30px;
     min-height: 30px;
     padding-left:  10px;
-    padding-top:  5px;
+    padding-top: 5px;
     cursor:  pointer;
 }
 
@@ -65,4 +66,51 @@
 .table-cell{
     max-width: 150px;
     min-width: 150px;
+}
+
+.result-area{
+    padding-left: 15px;
+}
+
+.text-area-heading{
+    padding-left: 28px;
+    margin-bottom: -30px;
+    color: green;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+}
+
+#output-container{
+    padding-left: 15px;
+    padding-top: 48px;
+}
+
+.manipulation-container{
+    background-color: lightgrey;
+    margin-left: 16px;
+    margin-top: 32px;
+    border-radius: 20px;
+    margin-right: 85px;
+    max-height: 800px;
+    min-height: 800px;
+    padding-top: 25px;
+}
+
+#output-container-top-students{
+    padding-left: 15px;
+    padding-top: 48px;
+}
+
+.chart-container{
+    padding-left: 15px;
+    padding-top: 48px;
+}
+
+#chartContainer{
+    padding-left: 15px;
+    padding-top: 48px;
+}
+
+.no-display{
+    display: none;
 }
