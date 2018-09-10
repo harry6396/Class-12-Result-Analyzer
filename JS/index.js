@@ -11,6 +11,7 @@ var oUIElements={
 }
 $(".upload-button").on("click",function(){
   ReadResult();
+  $(".file-container").addClass("no-display");
   $("#output-table-container").removeClass("no-display");
   $("#calculation-container").removeClass("no-display");
 });
