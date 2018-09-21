@@ -50,8 +50,8 @@
     margin-top: 32px;
     border-radius: 20px;
     margin-right: 85px;
-    max-height: 800px;
-    min-height: 800px;
+    max-height: 1100px;
+    min-height: 1100px;
     padding-top: 25px;
 }
 
@@ -64,8 +64,18 @@
 }
 
 .table-cell{
-    max-width: 150px;
-    min-width: 150px;
+    max-width: 120px;
+    min-width: 120px;
+}
+
+.table-cell-1{
+    max-width: 221px;
+    min-width: 221px;
+}
+
+.table-cell-2{
+    max-width: 90px;
+    min-width: 90px;
 }
 
 .result-area{
