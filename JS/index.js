@@ -61,6 +61,7 @@ for(; iCounterInner < sLineData.length; iCounterInner=iCounterInner+3){
   }
 }
 
+oSubject1=[];
 // get the list of students with marks
 for(iCounter = iCounter+1 ;iCounter < sData.length; iCounter++){
   sLineDataSubject = sData[iCounter].split(' ').filter(n=>n);
@@ -86,13 +87,22 @@ if(iCounter === sHeaderList.length){
  // get the table headings
   var sTable = RenderTableHeading();
 
+  oSubject1 = oSubject1.filter(function(e){return e}); 
+
   var sTableBody = RenderTableBody();
 
-  sTable = sTable + sTableBody + "</table>";
+  $("#output-container").append(sTable + sTableBody + "</table>");
 
-  $("#output-container").append(sTable);
+  // to get the average of each subject
+  getSubjectAverage();
 
-  //ChartRendering();
+  // to render the top students
+  sTableBody = getTopStudents();
+
+  $("#output-container-top-students").append(sTable + sTableBody + "</table>");
+
+  // to render the subject wise average
+  ChartRendering();
 }
 
 function RenderTableBody(){
@@ -119,7 +129,7 @@ function RenderTableBody(){
               sResult = "NA";
             }
           sTableBody = sTableBody + "<td>" + sResult + "</td>";
-          }
+        }
         }
         sTableBody = sTableBody + "</tr>";
       }
@@ -129,25 +139,6 @@ function RenderTableBody(){
 }
 
 function ChartRendering(){
-
-  var iCounter=0;
-  var iCounter1=0;
-  var iSum=0;
-  var Counter=0;
-  var sStudentCounter=0;
-
-  for(iCounter=0;iCounter<sHeaderList.length-2;iCounter++){
-    iSum=0;
-    sStudentCounter=0;
-    for(iCounter1=0;iCounter1<oSubject1.length;iCounter1++){
-      if(oSubject1[iCounter1][sHeaderList[iCounter+2]] !== "0" ){
-        sStudentCounter++;
-      iSum=iSum+parseInt(oSubject1[iCounter1][sHeaderList[iCounter+2]]);
-      }
-    }
-        sStudentCounter++;
-        oSubjectAverage[Counter++]=iSum/sStudentCounter;
-  }
 
   var chart = new CanvasJS.Chart("chartContainer", {
     animationEnabled: true,
@@ -164,12 +155,12 @@ function ChartRendering(){
       legendMarkerColor: "grey",
       legendText: "Subject",
       dataPoints: [      
-        { y: oSubjectAverage[0], label: "Physics" },
-        { y: oSubjectAverage[1],  label: "Mathematics" },
-        { y: oSubjectAverage[2],  label: "Chemistry" },
-        { y: oSubjectAverage[3],  label: "English" },
-        { y: oSubjectAverage[4],  label: "IP" },
-        { y: oSubjectAverage[5], label: "Biology" }
+        { y: oSubjectAverage[2]["PHYSICS"], label: "Physics" },
+        { y: oSubjectAverage[1]["MATHEMATICS"],  label: "Mathematics" },
+        { y: oSubjectAverage[3]["CHEMISTRY"],  label: "Chemistry" },
+        { y: oSubjectAverage[0]["ENGLISH"],  label: "English" },
+        { y: oSubjectAverage[5]["IP"],  label: "IP" },
+        { y: oSubjectAverage[4]["BIOLOGY"], label: "Biology" }
       ]
     }]
   });
@@ -241,7 +232,7 @@ function GetStudentDetails(sLineDataSubject,iCounter1){
       break;
    }
   }
-  if(oSubject){
+  if(oSubject && parseInt(iTotalMarks) > 0){
     oSubject["TotalMarks"] = iTotalMarks;
     oSubject["Percentage"] = iTotalMarks/5;
     oSubject1[iCounter1]=oSubject;
@@ -274,3 +265,62 @@ function checkSubject(sSubject){
   }
   return null;
 }
+
+// to get the subject average
+function getSubjectAverage(){
+var iCounter = 0;
+var iSize=0;
+var iInnerCounter=0;
+var oSubjectAverage1;
+var iSum=0;
+var sValue="";
+var iSubjectCounter=0;
+oSubjectAverage={};
+
+for(iInnerCounter=2;iInnerCounter<sHeaderList.length;iInnerCounter++){
+  iSum=0;
+  if(sHeaderList[iInnerCounter] !== "" && sHeaderList[iInnerCounter] !== "Percentage"){
+    oSubjectAverage1={};
+    iSubjectCounter=0;
+  for(iCounter=0;iCounter<oSubject1.length;iCounter++){
+    sValue = oSubject1[iCounter][sHeaderList[iInnerCounter]];
+    if(sValue !== NaN && sValue !== "" && sValue !== undefined){
+    iSum = iSum + parseInt(sValue);
+    iSubjectCounter++;
+    }
+}
+oSubjectAverage1[sHeaderList[iInnerCounter]] = iSum/iSubjectCounter;
+oSubjectAverage[iSize] = oSubjectAverage1;
+iSize++;
+  }
+}
+ }
+
+ // to get the top students
+ function getTopStudents(){
+
+  var iCounter = 0;
+  var iCounterInner = 0;
+  var sTableBody="";
+  var sResult="";
+
+  for(iCounter = 0; iCounter < 5; iCounter++){
+    if(oSubject1){
+    sTableBody = sTableBody + "<tr>";
+    for(iCounterInner = 0; iCounterInner < sHeaderList.length; iCounterInner++){
+      if(sHeaderList[iCounterInner] !== ""){
+        var sSubject = oSubject1[iCounter][sHeaderList[iCounterInner].replace(" ","")];
+        if(sSubject){
+          sResult = sSubject; 
+        }
+        else{
+          sResult = "NA";
+        }
+      sTableBody = sTableBody + "<td>" + sResult + "</td>";
+    }
+    }
+    sTableBody = sTableBody + "</tr>";
+  }
+}
+return sTableBody;
+ }
