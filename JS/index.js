@@ -108,6 +108,9 @@ if(iCounter === sHeaderList.length){
 
   // to render the subject wise average
   ChartRendering();
+
+  // to render the student passed subject wise
+  ChartRenderingStudentPassedSubjectWise();
 }
 
 function RenderTableBody(){
@@ -145,7 +148,7 @@ function RenderTableBody(){
 
 function ChartRendering(){
 
-  var chart = new CanvasJS.Chart("chartContainer", {
+  var chart = new CanvasJS.Chart("chartContainer1", {
     animationEnabled: true,
     theme: "light2",
     title:{
@@ -156,9 +159,9 @@ function ChartRendering(){
     },
     data: [{        
       type: "column",  
-      showInLegend: true, 
-      legendMarkerColor: "grey",
-      legendText: "Subject",
+      showInLegend: false, 
+      legendMarkerColor: "",
+      legendText: "",
       dataPoints: [      
         { y: oSubjectAverage[2]["PHYSICS"], label: "Physics" },
         { y: oSubjectAverage[1]["MATHEMATICS"],  label: "Mathematics" },
@@ -328,4 +331,87 @@ iSize++;
   }
 }
 return sTableBody;
+ }
+
+ // to render the student passed subject wise
+ function ChartRenderingStudentPassedSubjectWise(){
+
+  var iCounter = 0;
+  var oSubjectCounter=[];
+  var oTotalStudentapeared=[];
+  var iTotalStudentapeared=0;
+  var iSubjectCounter=0;
+  var iToCountStudents=0;
+  var sSubjectData="";
+
+  for(iCounter = 2; iCounter < sHeaderList.length;iCounter++){
+      var sSubject=sHeaderList[iCounter];
+      if(sSubject !== "Percentage" && sSubject !== "" && sSubject !== undefined){
+        oSubjectCounter[iSubjectCounter]=0;
+        iToCountStudents=0;
+        iTotalStudentapeared=0;
+      for(var iInnerCounter = 0; iInnerCounter < oSubject1.length;iInnerCounter++){
+        sSubjectData=oSubject1[iInnerCounter][sSubject];
+        if(sSubjectData !== NaN && sSubjectData !== "" && sSubjectData !== undefined){
+          if(parseInt(sSubjectData) >= 33){
+            iToCountStudents++;
+          }
+            iTotalStudentapeared++;
+        }
+      }
+      if(iToCountStudents > 0){
+      oSubjectCounter[iSubjectCounter]=iToCountStudents;
+      oTotalStudentapeared[iSubjectCounter]=iTotalStudentapeared;
+      iSubjectCounter++;
+      }
+      }
+  }
+
+  var chart = new CanvasJS.Chart("chartContainer", {
+    animationEnabled: true,
+    theme: "light2",
+    title:{
+      text: "Passed Students Subject-Wise"
+    },
+    axisY: {
+      title: "Number of Students"
+    },
+    axisY2: {
+      title: "Students-Appeared",
+      titleFontColor: "#C0504E",
+      lineColor: "#C0504E",
+      labelFontColor: "#C0504E",
+      tickColor: "#C0504E"
+    },
+    data: [{        
+      type: "column",  
+      showInLegend: true, 
+      legendMarkerColor: "#4F81BC",
+      legendText: "Students-Passed",
+      dataPoints: [      
+        { y: oSubjectCounter[2], label: "Students-Passed" },
+        { y: oSubjectCounter[1],  label: "Students-Passed" },
+        { y: oSubjectCounter[3],  label: "Students-Passed" },
+        { y: oSubjectCounter[0],  label: "Students-Passed" },
+        { y: oSubjectCounter[5],  label: "Students-Passed" },
+        { y: oSubjectCounter[4], label: "Students-Passed" }
+      ]
+    },
+    {        
+      type: "column",  
+      showInLegend: true, 
+      legendMarkerColor: "lightgreen",
+      legendText: "Students-Appeared",
+      dataPoints: [      
+        { y: oTotalStudentapeared[2], label: "Students-Appeared" },
+        { y: oTotalStudentapeared[1],  label: "Students-Appeared" },
+        { y: oTotalStudentapeared[3],  label: "Students-Appeared" },
+        { y: oTotalStudentapeared[0],  label: "Students-Appeared" },
+        { y: oTotalStudentapeared[5],  label: "Students-Appeared" },
+        { y: oTotalStudentapeared[4], label: "Students-Appeared" }
+      ]
+    }
+  ]
+  });
+  chart.render();
  }
