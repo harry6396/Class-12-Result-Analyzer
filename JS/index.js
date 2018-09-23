@@ -111,6 +111,12 @@ if(iCounter === sHeaderList.length){
 
   // to render the student passed subject wise
   ChartRenderingStudentPassedSubjectWise();
+
+  // to render the performance chart
+  ChartRenderingPercentageWise();
+
+  //to render the students count having distinction
+  ChartRenderingDistinction();
 }
 
 function RenderTableBody(){
@@ -163,12 +169,12 @@ function ChartRendering(){
       legendMarkerColor: "",
       legendText: "",
       dataPoints: [      
-        { y: oSubjectAverage[2]["PHYSICS"], label: "Physics" },
-        { y: oSubjectAverage[1]["MATHEMATICS"],  label: "Mathematics" },
-        { y: oSubjectAverage[3]["CHEMISTRY"],  label: "Chemistry" },
         { y: oSubjectAverage[0]["ENGLISH"],  label: "English" },
-        { y: oSubjectAverage[5]["IP"],  label: "IP" },
-        { y: oSubjectAverage[4]["BIOLOGY"], label: "Biology" }
+        { y: oSubjectAverage[1]["MATHEMATICS"],  label: "Mathematics" },
+        { y: oSubjectAverage[2]["PHYSICS"], label: "Physics" },
+        { y: oSubjectAverage[3]["CHEMISTRY"],  label: "Chemistry" },
+        { y: oSubjectAverage[4]["BIOLOGY"], label: "Biology" },
+        { y: oSubjectAverage[5]["IP"],  label: "IP" }
       ]
     }]
   });
@@ -371,7 +377,7 @@ return sTableBody;
     animationEnabled: true,
     theme: "light2",
     title:{
-      text: "Passed Students Subject-Wise"
+      text: "Students Subject-Wise"
     },
     axisY: {
       title: "Number of Students"
@@ -383,35 +389,174 @@ return sTableBody;
       labelFontColor: "#C0504E",
       tickColor: "#C0504E"
     },
-    data: [{        
-      type: "column",  
-      showInLegend: true, 
-      legendMarkerColor: "#4F81BC",
-      legendText: "Students-Passed",
-      dataPoints: [      
-        { y: oSubjectCounter[2], label: "Students-Passed" },
-        { y: oSubjectCounter[1],  label: "Students-Passed" },
-        { y: oSubjectCounter[3],  label: "Students-Passed" },
-        { y: oSubjectCounter[0],  label: "Students-Passed" },
-        { y: oSubjectCounter[5],  label: "Students-Passed" },
-        { y: oSubjectCounter[4], label: "Students-Passed" }
-      ]
-    },
+    data: [{      type: "column",  
+    showInLegend: true, 
+    legendMarkerColor: "lightgreen",
+    legendText: "Students-Passed",
+    dataPoints: [      
+      { y: oTotalStudentapeared[0],  label: "Students-Appeared" },
+      { y: oTotalStudentapeared[1],  label: "Students-Appeared" },
+      { y: oTotalStudentapeared[2], label: "Students-Appeared" },
+      { y: oTotalStudentapeared[3],  label: "Students-Appeared" },
+      { y: oTotalStudentapeared[4], label: "Students-Appeared" },
+      { y: oTotalStudentapeared[5],  label: "Students-Appeared" }
+    ]},
     {        
       type: "column",  
       showInLegend: true, 
-      legendMarkerColor: "lightgreen",
+      legendMarkerColor: "#4F81BC",
       legendText: "Students-Appeared",
       dataPoints: [      
-        { y: oTotalStudentapeared[2], label: "Students-Appeared" },
-        { y: oTotalStudentapeared[1],  label: "Students-Appeared" },
-        { y: oTotalStudentapeared[3],  label: "Students-Appeared" },
-        { y: oTotalStudentapeared[0],  label: "Students-Appeared" },
-        { y: oTotalStudentapeared[5],  label: "Students-Appeared" },
-        { y: oTotalStudentapeared[4], label: "Students-Appeared" }
-      ]
-    }
-  ]
+        { y: oSubjectCounter[0],  label: "Students-Passed" },
+        { y: oSubjectCounter[1],  label: "Students-Passed" },
+        { y: oSubjectCounter[2], label: "Students-Passed" },
+        { y: oSubjectCounter[3],  label: "Students-Passed" },
+        { y: oSubjectCounter[4], label: "Students-Passed" },
+        { y: oSubjectCounter[5],  label: "Students-Passed" }
+      ]},
+      {
+        type: "column",  
+      showInLegend: true, 
+      legendMarkerColor: "red",
+      legendText: "Students-Failed",
+      dataPoints: [      
+        { y: oTotalStudentapeared[0]-oSubjectCounter[0],  label: "Students-Failed" },
+        { y: oTotalStudentapeared[1]-oSubjectCounter[1],  label: "Students-Failed" },
+        { y: oTotalStudentapeared[2]-oSubjectCounter[2], label: "Students-Failed" },
+        { y: oTotalStudentapeared[3]-oSubjectCounter[3],  label: "Students-Failed" },
+        { y: oTotalStudentapeared[4]-oSubjectCounter[4], label: "Students-Failed" },
+        { y: oTotalStudentapeared[5]-oSubjectCounter[5],  label: "Students-Failed" }
+      ]},
+      {
+        type: "column",  
+      showInLegend: false, 
+      legendMarkerColor: "",
+      legendText: "",
+      dataPoints: [      
+        { y: 0,  label: "English" },
+        { y: 0,  label: "Mathematics" },
+        { y: 0, label: "Physics" },
+        { y: 0,  label: "Chemistry" },
+        { y: 0, label: "Biology" },
+        { y: 0,  label: "IP" }
+  ]}]
   });
   chart.render();
  }
+
+ // to render the student percentage wise
+ function ChartRenderingPercentageWise(){
+
+  var iCounter=0;
+  var iSubjectCounter=0;
+  var oPercentageResult=[];
+  var sPercentageData="";
+
+  for(iCounter =0; iCounter<7;iCounter++){
+    oPercentageResult[iCounter]=0;
+  }
+
+    for(iCounter = 0; iCounter < oSubject1.length; iCounter++){
+      sPercentageData = oSubject1[iCounter]["Percentage"];
+      if(parseInt(sPercentageData) <40 ){
+        oPercentageResult[0]++;
+      }
+      else if(parseInt(sPercentageData) >=40 && parseInt(sPercentageData) <=49.9){
+        oPercentageResult[1]++;
+      }
+      else if(parseInt(sPercentageData) >=50 && parseInt(sPercentageData) <=59.9){
+        oPercentageResult[2]++;
+      }
+      else if(parseInt(sPercentageData) >=60 && parseInt(sPercentageData) <=69.9){
+        oPercentageResult[3]++;
+      }
+      else if(parseInt(sPercentageData) >=70 && parseInt(sPercentageData) <=79.9){
+        oPercentageResult[4]++;
+      }
+      else if(parseInt(sPercentageData) >=80 && parseInt(sPercentageData) <=89.9){
+        oPercentageResult[5]++;
+      }
+      else if(parseInt(sPercentageData) >=90){
+        oPercentageResult[6]++;
+      }
+    }
+
+  var chart = new CanvasJS.Chart("chartContainer2", {
+    animationEnabled: true,
+    theme: "light2",
+    title:{
+      text: "Student Performance"
+    },
+    axisY: {
+      title: "Number of students"
+    },
+    data: [{        
+      type: "column",  
+      showInLegend: false, 
+      legendMarkerColor: "",
+      legendText: "",
+      dataPoints: [      
+        { y: oPercentageResult[0], label: "<40" },
+        { y: oPercentageResult[1],  label: "40-49.9" },
+        { y: oPercentageResult[2],  label: "50-59.9" },
+        { y: oPercentageResult[3],  label: "60-69.9" },
+        { y: oPercentageResult[4],  label: "70-79.9" },
+        { y: oPercentageResult[5], label: "80-89.9" },
+        { y: oPercentageResult[6], label: ">=90" }
+      ]
+    }]
+  });
+  chart.render();
+  }
+
+  // to render the subject wise distinction
+  function ChartRenderingDistinction(){
+
+    var iCounter=0;
+    var oSubjectDistinction = [];
+    var iSubjectCounter = 0;
+    var sSubject="";
+    var sSubjectData;
+    var iSubjectDataCount=0;  
+
+    for(iCounter = 2; iCounter<sHeaderList.length;iCounter++){
+      iSubjectDataCount=0;
+      sSubject = sHeaderList[iCounter];
+      if(sSubject !== "Percentage" && sSubject !== "" && sSubject !== NaN){
+      for(var iInnerCounter=0; iInnerCounter<oSubject1.length;iInnerCounter++ ){
+        sSubjectData = oSubject1[iInnerCounter][sSubject];
+        if(parseInt(sSubjectData) >=75 ){
+          iSubjectDataCount++;
+        }
+      }
+      oSubjectDistinction[iSubjectCounter]=iSubjectDataCount;
+      iSubjectCounter++;
+    }
+    }
+
+    var chart = new CanvasJS.Chart("chartContainer3", {
+      animationEnabled: true,
+      theme: "light2",
+      title:{
+        text: "Subject wise Distinction (Subject marks > 75)"
+      },
+      axisY: {
+        title: "Number of students"
+      },
+      data: [{        
+        type: "column",  
+        showInLegend: false, 
+        legendMarkerColor: "",
+        legendText: "",
+        dataPoints: [      
+          { y: oSubjectDistinction[0],  label: "ENGLISH" },
+          { y: oSubjectDistinction[1],  label: "MATHEMATICS" },
+          { y: oSubjectDistinction[2], label: "PHYSICS" },
+          { y: oSubjectDistinction[3],  label: "CHEMISTRY" },
+          { y: oSubjectDistinction[4], label: "BIOLOGY" },
+          { y: oSubjectDistinction[5],  label: "IP" }
+        ]
+      }]
+    });
+    chart.render();
+  }
