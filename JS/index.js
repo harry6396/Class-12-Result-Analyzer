@@ -16,6 +16,11 @@ $(".upload-button").on("click",function(){
   $("#output-table-container").removeClass("no-display");
   $("#calculation-container").removeClass("no-display");
 });
+
+$("#closebutton").on("click",function(){
+  $(".modal").addClass("no-display");
+});
+
 });
 
 function ReadResult(){
