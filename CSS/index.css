@@ -141,8 +141,8 @@
     margin-top: 32px;
     border-radius: 20px;
     margin-right: 85px;
-    max-height: 800px;
-    min-height: 800px;
+    max-height: 1000px;
+    min-height: 1000px;
     padding-top: 25px;
 }
 
@@ -163,4 +163,14 @@
 
 .no-display{
     display: none;
+}
+
+.chartContainer1{
+    padding-left: 15px;
+    padding-top: 48px;
+}
+
+#chartContainer1{
+    padding-left: 15px;
+    padding-top: 48px;
 }
