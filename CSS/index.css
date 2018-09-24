@@ -7,10 +7,8 @@
 }
 
 .heading-container{
-    background-color: lightgrey;
-    margin-left: -71px;
-    margin-top: 14px;
-    border-radius: 20px;
+    margin-left: -98px;
+    margin-top: 12px;
 }
 
 .file-container{
@@ -53,6 +51,7 @@
     max-height: 1100px;
     min-height: 1100px;
     padding-top: 25px;
+    /* min-width: 1100px; */
 }
 
 .modal {
@@ -96,16 +95,16 @@
 }
 
 .table-body{
-    margin-left: 40px;
+    margin-left: 4px;
     color: green;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    border:0px solid white;
+    border: 0px solid white;
     POSITION:  STICKY;
 }
 
 .table-cell{
-    max-width: 120px;
-    min-width: 120px;
+    max-width: 110px;
+    min-width: 110px;
 }
 
 .table-cell-1{
@@ -116,6 +115,7 @@
 .table-cell-2{
     max-width: 90px;
     min-width: 90px;
+    /* border: 1px solid black; */
 }
 
 .result-area{
@@ -123,7 +123,7 @@
 }
 
 .text-area-heading{
-    padding-left: 28px;
+    padding-left: 16px;
     margin-bottom: -30px;
     color: green;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -131,8 +131,9 @@
 }
 
 #output-container{
-    padding-left: 15px;
+    /* padding-left: 0px; */
     padding-top: 48px;
+    margin-left: 18px;
 }
 
 .manipulation-container{
@@ -178,4 +179,8 @@
 #chartContainer3{
     padding-left: 15px;
     padding-top: 48px;
+}
+
+.table-cell-padding{
+    padding-right:30px;
 }
