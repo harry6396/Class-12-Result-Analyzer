@@ -85,7 +85,8 @@ for(iCounter=0;iCounter<sHeaderList.length;iCounter++){
   }
 }
 if(iCounter === sHeaderList.length){
-  sHeaderList[iCounter]="Percentage";
+  sHeaderList[iCounter]="TotalMarks";
+  sHeaderList[iCounter+1]="Percentage";
 }
 
 
@@ -129,7 +130,15 @@ function RenderTableBody(){
     oSubject1.sort(function(a,b){
       return b.Percentage-a.Percentage;
       });
-      
+
+      for(iCounter=0;iCounter<oSubject1.length;iCounter++){
+        oSubject1[iCounter]["Rank"]=iCounter+1;
+      }
+
+      oSubject1.sort(function(a,b){
+        return a.ROLLNO-b.ROLLNO;
+        });
+
       for(iCounter = 0; iCounter < oSubject1.length; iCounter++){
         if(oSubject1){
         sTableBody = sTableBody + "<tr>";
@@ -194,6 +203,7 @@ function getSubject(sSubject){
 function RenderTableHeading(){
 
   var iCounter;
+  sHeaderList[sHeaderList.length]="Rank";
   var sTable="<table class=\"table-body\"><tr>";
 
   for(iCounter = 0 ; iCounter < sHeaderList.length; iCounter++){
@@ -204,7 +214,9 @@ function RenderTableHeading(){
       sTable=sTable+"<th class=\"table-cell-2\">"+sHeaderList[iCounter]+"</th>";
     }
     else if(sHeaderList[iCounter] !== ""){
-      sTable=sTable+"<th class=\"table-cell\">"+sHeaderList[iCounter]+"</th>";
+      sTable=sTable+"<th class=\"table-cell-padding table-cell-"+(iCounter+1)+"\">"+sHeaderList[iCounter]+"</th>";
+      $(".table-cell-"+(iCounter+1)).css("max-width",sHeaderList[iCounter]*10);
+      $(".table-cell-"+(iCounter+1)).css("min-width",sHeaderList[iCounter]*10);
     }
   }
 return sTable;
@@ -249,6 +261,7 @@ function GetStudentDetails(sLineDataSubject,iCounter1){
   if(oSubject && parseInt(iTotalMarks) > 0){
     oSubject["TotalMarks"] = iTotalMarks;
     oSubject["Percentage"] = iTotalMarks/5;
+    oSubject["Rank"] = 0;
     oSubject1[iCounter1]=oSubject;
   }
 
@@ -317,6 +330,12 @@ iSize++;
   var iCounterInner = 0;
   var sTableBody="";
   var sResult="";
+
+  var oTopStudents = oSubject1;
+
+  oTopStudents.sort(function (a,b){
+    return b.Percentage-a.Percentage;
+  });
 
   for(iCounter = 0; iCounter < 5; iCounter++){
     if(oSubject1){
