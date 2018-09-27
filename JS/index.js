@@ -36,7 +36,7 @@ function ReadResult(){
   sData = $("#file").val().split('\n');
   sData = sData.filter(n=>n);
 
-  //to find the first row having Headings
+  //to find the first row having Headingss
   for(iCounter = 0; iCounter < sData.length; iCounter++){
     sLineData = sData[iCounter].split(' ').filter(n=>n);
     if(sLineData.length > 0 && (sLineData[0].toLowerCase() === "roll" || sLineData[0].toLowerCase() === "rollno")){
