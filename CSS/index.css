@@ -184,3 +184,19 @@
 .table-cell-padding{
     padding-right:30px;
 }
+
+.export-to-pdf-container{
+    margin-left: 1000px;
+    margin-top: -44px;
+    cursor: pointer;
+}
+
+.export-to-pdf-image{
+    margin-bottom: -28px;
+    margin-left: -50px;
+}
+
+.image{
+  width: 40px;
+  height: 40px;
+}

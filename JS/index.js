@@ -9,17 +9,39 @@ var oSubjectList = [{"SubjectCode":"301","Subject":"ENGLISH"},
 {"SubjectCode":"065","Subject":"IP"}];
 
 angular.module('myApp', []).controller('myCtrl', function() {
+  var sURL="https://localhost:5001/api/values";
 
 $(".upload-button").on("click",function(){
   ReadResult();
   $(".file-container").addClass("no-display");
   $("#output-table-container").removeClass("no-display");
   $("#calculation-container").removeClass("no-display");
+  $("#export-pdf-container").removeClass("no-display");
 });
 
 $("#closebutton").on("click",function(){
   $(".modal").addClass("no-display");
 });
+
+$("#export-pdf-container").on("click", function(){
+  var sFileName = "Result Analyzer";
+
+$.post(sURL,{name:"Prabhat"},function (oExcelStream) {
+// if the browser is IE, store the Excel as blob
+if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+var oBlobFile = new Blob([convertToArray(atob(oExcelStream))], {
+type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,"
+});
+window.navigator.msSaveBlob(oBlobFile, sFileName);
+}
+// else use download attribute a tag for HTML 5
+else {
+var oFileHolder = document.getElementById("fileHolder");
+oFileHolder.href = "data:application/vnd.ms-excel;base64," + oExcelStream;
+oFileHolder.download = sFileName;
+oFileHolder.click();
+}
+});});
 
 });
 
