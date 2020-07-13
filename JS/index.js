@@ -6,7 +6,7 @@ var oSubjectList = [{"SubjectCode":"301","Subject":"ENGLISH"},
 {"SubjectCode":"042","Subject": "PHYSICS"},
 {"SubjectCode":"043","Subject":"CHEMISTRY"},
 {"SubjectCode":"044","Subject":"BIOLOGY"},
-{"SubjectCode":"065","Subject":"IP"}];
+{"SubjectCode":"265","Subject":"IP"}];
 
 angular.module('myApp', []).controller('myCtrl', function() {
 
